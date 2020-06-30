@@ -10,6 +10,22 @@ export default class App extends Component {
 
     this.handleChange = this.handleChange.bind(this)
     this.handleDownload = this.handleDownload.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
+  }
+
+  handleSubmit() {
+    const form = new FormData()
+    form.append('name', this.state.file.name)
+    form.append('type', this.state.file.type)
+    form.append('data', this.state.file)
+
+    fetch('http://127.0.0.1:5000/file/add', {
+      method: 'POST',
+      body: form
+    })
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.log(error))
   }
 
   handleChange(event) {
@@ -33,6 +49,7 @@ export default class App extends Component {
     return (
       <div className='app'>
         <input onChange = {this.handleChange} type = 'file'></input>
+        <button onClick = {this.handleSubmit}>Send</button>
         <button onClick = {this.handleDownload}>Download</button>
       </div>
     );
