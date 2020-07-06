@@ -32,7 +32,7 @@ export default class FileShare extends Component {
         <Singlefile id={fileData.id} 
         name={fileData.name} 
         type={fileData.file_type} 
-        handeDelete = {this.handleDelete}
+        handleDelete = {this.handleDelete}
         />
       )
     })
@@ -84,7 +84,11 @@ export default class FileShare extends Component {
         <button onClick = {this.handleSubmit}>Send</button>
         <hr/>
         <button onClick = {this.handleGetData}>Get Files</button>
-        {this.renderFiles()}
+        <div className = 'files-wrapper'>
+
+          {this.renderFiles()}
+        </div>
+        
       </div>
     );
   }

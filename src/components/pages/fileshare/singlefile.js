@@ -5,7 +5,7 @@ export default class Singlefile extends Component {
         super(props)
 
         this.state = {
-            file: {}
+            file: undefined
         }
 
         this.handleDownload = this.handleDownload.bind(this)
@@ -37,11 +37,14 @@ handleDownload() {
 
   handleDelete () {
       fetch(`http://127.0.0.1:5000/file/delete/${this.props.id}`, {method: 'DELETE'})
-      .then(response => response.json)
+      .then(response => response.json())
       .then(data => {
         console.log(data)
+        
         if(data === 'file delete success!') {
+            console.log('test')
             this.props.handleDelete(this.props.id)
+            
         }
       })
       .catch(error => console.log(error))
@@ -53,7 +56,7 @@ render() {
             <div className = 'single-file-wrapper'>
                 <h3>{this.state.file.name}</h3>
                 <button onClick = {this.handleDownload}>Download</button>
-                <button onClick = {this.handleDelete}>Delete</button>
+                <button className = 'delete-button' onClick = {this.handleDelete}>Delete</button>
             </div>
         )
         }
